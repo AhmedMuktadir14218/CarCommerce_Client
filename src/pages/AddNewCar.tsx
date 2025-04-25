@@ -39,7 +39,21 @@ const AddNewCar: React.FC = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImageBase64(reader.result as string);
+        // Resize image before converting to base64
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const maxWidth = 800; // Set max width
+          const scaleFactor = maxWidth / img.width;
+          canvas.width = maxWidth;
+          canvas.height = img.height * scaleFactor;
+          
+          ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const resizedBase64 = canvas.toDataURL('image/jpeg', 0.7); // Compress
+          setImageBase64(resizedBase64);
+        };
+        img.src = reader.result as string;
       };
       reader.readAsDataURL(file);
     }

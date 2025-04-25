@@ -1,0 +1,8 @@
+    "brand": "Mitsubishi",
+    "model": "Outlander",
+    "year": 2020,
+    "price": 2950000,
+    "category": "SUV",
+    "description": "Versatile SUV with all-wheel drive and strong performance.",
+    "quantity": 2,
+    "inStock": true,
